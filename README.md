@@ -28,9 +28,19 @@ TWITCH_SECRET=***
 DISCORD_WEBHOOK=https://discord.com/api/webhooks/****
 ```
 
-### 2. Twitch への登録
+### 2. リスナーのテスト（任意）
 
-Twitch Developer Console で事前に、アプリケーション登録を済ませて、クライアント ID とアクセストークンを取得してください。
+正しく登録できているか以下のコマンドを使って確かめます。
+
+```bash
+twitch event trigger stream.online -F "<あなたのWorkersのURL 例: https://**** */.workers.dev/eventsub/>" -s "<設定したTWITCH_SECRE>"
+```
+
+設定したチャンネルにメッセージが届けば成功です！
+
+### 3. Twitch への登録
+
+Twitch Developer Console で事前に、アプリケーション登録を済ませて、クライアント ID とクライアントシークレットを取得してください。
 
 #### アクセストークンの取得
 
@@ -102,3 +112,7 @@ curl -X POST "https://api.twitch.tv/helix/eventsub/subscriptions" \
     }
   }'
 ```
+
+### 🎉 Congratulations
+
+これで作業は完了です！推し活を楽しみましょう！
