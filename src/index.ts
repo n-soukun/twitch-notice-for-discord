@@ -4,8 +4,6 @@ import { Hono, HonoRequest } from "hono";
 type Bindings = {
   TWITCH_SECRET: string;
   DISCORD_WEBHOOK: string;
-  TWITCH_ACCESS_TOKEN: string;
-  TWITCH_CLIENT_ID: string;
 };
 
 // 通知リクエストのヘッダー
