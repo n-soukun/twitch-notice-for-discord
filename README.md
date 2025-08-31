@@ -31,7 +31,7 @@ DISCORD_WEBHOOK=https://discord.com/api/webhooks/****
 
 ### 2. リスナーのテスト（任意）
 
-正しくデプロイできているか、以下のコマンドを使って確かめます。
+正しくデプロイできているか、以下のコマンドを使って確かめてください。`twitch`コマンドのインストール方法は[Twitch CLI の公式ページ](https://dev.twitch.tv/docs/cli/)を参照してください。
 
 ```bash
 twitch event trigger stream.online -F "<あなたのWorkersのURL 例: https://**** */.workers.dev/eventsub/>" -s "<設定したTWITCH_SECRET>"
@@ -41,7 +41,7 @@ twitch event trigger stream.online -F "<あなたのWorkersのURL 例: https://*
 
 ### 3. Twitch への登録
 
-Twitch Developer Console で事前に、アプリケーション登録を済ませて、クライアント ID とクライアントシークレットを取得してください。
+[Twitch Developers Console](https://dev.twitch.tv/console) で事前にアプリケーション登録を済ませて、クライアント ID とクライアントシークレットを取得してください。
 
 #### アクセストークンの取得
 
