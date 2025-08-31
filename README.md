@@ -116,3 +116,7 @@ curl -X POST "https://api.twitch.tv/helix/eventsub/subscriptions" \
 ### 🎉 Congratulations
 
 これで作業は完了です！推し活を楽しみましょう！
+
+## ライセンス
+
+MIT License (see `LICENSE` file).
