@@ -6,6 +6,7 @@
 
 ### 事前に必要なもの
 
+- Discord Webhook URL
 - Cloudflare アカウント
 - Twitch アカウント
   - クライアント ID
@@ -30,13 +31,13 @@ DISCORD_WEBHOOK=https://discord.com/api/webhooks/****
 
 ### 2. リスナーのテスト（任意）
 
-正しく登録できているか以下のコマンドを使って確かめます。
+正しくデプロイできているか、以下のコマンドを使って確かめます。
 
 ```bash
-twitch event trigger stream.online -F "<あなたのWorkersのURL 例: https://**** */.workers.dev/eventsub/>" -s "<設定したTWITCH_SECRE>"
+twitch event trigger stream.online -F "<あなたのWorkersのURL 例: https://**** */.workers.dev/eventsub/>" -s "<設定したTWITCH_SECRET>"
 ```
 
-設定したチャンネルにメッセージが届けば成功です！
+設定した Discord チャンネルにメッセージが届けば成功です！
 
 ### 3. Twitch への登録
 
@@ -44,78 +45,16 @@ Twitch Developer Console で事前に、アプリケーション登録を済ま�
 
 #### アクセストークンの取得
 
-リクエスト例
-
-```bash
-curl -X POST "https://id.twitch.tv/oauth2/token" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "client_id=<あなたのクライアントID>" \
-  -d "client_secret=<あなたのクライアントシークレット>" \
-  -d "grant_type=client_credentials"
 ```
-
-レスポンス例
-
-```json
-  "access_token": "xxxxxxxxxxxx",
-  "expires_in": 4929058,
-  "token_type": "bearer"
-```
-
-#### 配信者 ID の取得
-
-```bash
-curl.exe -X GET "https://api.twitch.tv/helix/users?login=<配信者URLの末尾>" \
-  -H "Client-ID: <あなたのクライアントID>" \
-  -H "Authorization: Bearer <取得したアクセストークン>"
-```
-
-※配信者 URL の末尾とは
-
-```
-https://www.twitch.tv/<ここの文字列>
-```
-
-レスポンス例
-
-```json
-{"data":
-    [
-        {
-            "id":"<配信者ID>",
-            "login":"***",
-            "display_name":"***",
-            ...
-            "created_at":"2024-11-15T06:51:25Z"
-        }
-    ]
-}
+node cli/index.mjs token -c <あなたのクライアントID> -s <あなたのクライアントシークレット>
+> Access Token: **********
 ```
 
 #### EventSub サブスクライブのリクエスト
 
-```bash
-curl -X POST "https://api.twitch.tv/helix/eventsub/subscriptions" \
-  -H "Client-ID: <あなたのクライアントID>" \
-  -H "Authorization: Bearer <取得したアクセストークン>" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "type": "stream.online",
-    "version": "1",
-    "condition": {
-      "broadcaster_user_id": "<取得した配信者ID>"
-    },
-    "transport": {
-      "method": "webhook",
-      "callback": "<あなたのWorkersのURL 例: https://**** */.workers.dev/eventsub/>",
-      "secret": "<設定したTWITCH_SECRE>"
-    }
-  }'
 ```
-
-### 🎉 Congratulations
-
-これで作業は完了です！推し活を楽しみましょう！
+node cli/index.mjs subscribe -c <あなたのクライアントID> -t <取得したアクセストークン> -b <配信者のユーザーネーム> -u <デプロイしたWorkerのURL> -s <設定したシークレット>
+```
 
 ## ライセンス
 

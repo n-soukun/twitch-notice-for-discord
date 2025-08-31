@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
+    "commander": "^14.0.0",
     "wrangler": "^4.4.0"
   }
 }
