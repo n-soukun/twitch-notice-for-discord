@@ -3,6 +3,9 @@ import { Hono, HonoRequest } from "hono";
 
 type Bindings = {
   TWITCH_SECRET: string;
+  DISCORD_WEBHOOK: string;
+  TWITCH_ACCESS_TOKEN: string;
+  TWITCH_CLIENT_ID: string;
 };
 
 // 通知リクエストのヘッダー
@@ -38,7 +41,18 @@ app.post("/eventsub/", async (c) => {
     const notification = await c.req.json();
 
     if (MESSAGE_TYPE_NOTIFICATION === c.req.header(MESSAGE_TYPE)) {
-      // TODO: イベントのデータを使って何らかの処理を行う
+      if (notification.subscription.type === "stream.online") {
+        const message = {
+          content: `🔴 ${notification.event.broadcaster_user_name} さんがオンラインになりました！\nhttps://twitch.tv/${notification.event.broadcaster_user_login}`,
+        };
+        await fetch(c.env.DISCORD_WEBHOOK, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(message),
+        });
+      }
 
       console.log(`Event type: ${notification.subscription.type}`);
       console.log(JSON.stringify(notification.event, null, 4));
