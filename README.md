@@ -1,4 +1,4 @@
-# Twiter Notice for Discord
+# Twitch Notice for Discord
 
 配信者がオンラインになったら Discord へ通知を送ってくれる EventSub リスナーです。
 
